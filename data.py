@@ -20,11 +20,16 @@ def generate_data_points(size, output_path=None):
     return df
 
 
-def plot_data(file_path, weights=None):
+def get_data(file_path):
     if os.path.exists(file_path):
         df = pd.read_csv(file_path)
     else:
         df = generate_data_points(100, file_path)
+    return df
+
+
+def plot_data(file_path, weights=None):
+    df = get_data(file_path)
 
     plt.scatter(x=df.x, y=df.y, c="lightcoral")
     plt.xlabel("x")
@@ -35,3 +40,6 @@ def plot_data(file_path, weights=None):
         plt.plot(xlin, polynom(xlin), c="red")
 
     plt.show()
+
+
+
